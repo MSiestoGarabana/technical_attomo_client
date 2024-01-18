@@ -13,7 +13,7 @@ class GamesService {
     return this.api.get(`/getGameById/${game_id}`);
   }
   createGame(gameData) {
-    return this.api.get("/createGame", gameData);
+    return this.api.post("/createGame", gameData);
   }
 }
 

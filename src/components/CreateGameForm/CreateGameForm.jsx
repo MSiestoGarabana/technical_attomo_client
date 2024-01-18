@@ -1,8 +1,6 @@
 import {
   Form,
   Button,
-  Row,
-  Col,
   InputGroup,
   SplitButton,
   Dropdown,
@@ -14,10 +12,9 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
   const [gameData, setGameData] = useState({
     title: "",
     category: "",
-    image: "",
+    image: undefined,
   });
 
-  console.log(gameData);
   const handleChange = (e) => {
     const { value, name } = e.target;
     setGameData({ ...gameData, [name]: value });
@@ -34,7 +31,7 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
       .createGame(gameData)
       .then(() => {
         closeModal();
-        refreshCoasters();
+        refreshGames();
       })
       .catch((ERR) => console.error(ERR));
   };
