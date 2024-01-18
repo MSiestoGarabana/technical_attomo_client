@@ -6,7 +6,7 @@ const GamesList = ({ games }) => {
     <Row>
       {games.map((game) => {
         return (
-          <Col md={3} key={game._id}>
+          <Col md={4} key={game._id}>
             <GameCard {...game} />
           </Col>
         );
