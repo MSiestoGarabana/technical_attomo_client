@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../contexts/theme.context";
+import { AuthContext } from "../../contexts/auth.context";
 
 const Navigation = () => {
   const { theme } = useContext(ThemeContext);
   const variant = theme === "light" ? "dark" : "light";
+  const { user } = useContext(AuthContext);
   return (
     <Navbar bg={variant} expand="md" variant={variant} className="mb-5">
       <Container>
@@ -13,6 +15,7 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            {user && <p>Hi there! {user.username}</p>}
             <Link to="/">
               <Nav.Link as="span">Home</Nav.Link>
             </Link>

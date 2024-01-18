@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col md={{ offset: 3, span: 6 }}>
           <h1>Log In!</h1>
           <hr />
           <LoginForm />

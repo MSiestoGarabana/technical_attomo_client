@@ -41,7 +41,7 @@ function LoginForm() {
   return (
     <Form onSubmit={handleSubmit} id="loginForm__container--body">
       <Form.Group className="mb-3" controlId="username">
-        <Form.Label id="loginForm__text">User Name</Form.Label>
+        <Form.Label id="loginForm__text">User</Form.Label>
         <Form.Control
           type="username"
           value={username}
@@ -51,7 +51,7 @@ function LoginForm() {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="password">
-        <Form.Label id="loginForm__text">Contraseña</Form.Label>
+        <Form.Label id="loginForm__text">Password</Form.Label>
         <Form.Control
           type="password"
           value={password}
