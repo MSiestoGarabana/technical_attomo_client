@@ -2,7 +2,6 @@ import { Col, Row } from "react-bootstrap";
 import GameCard from "../GameCard/GameCard";
 
 const GamesList = ({ games }) => {
-  console.log("Games from gameslist", games);
   return (
     <Row>
       {games.map((game) => {

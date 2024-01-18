@@ -1,8 +1,18 @@
 import React from "react";
-import "./LoginPage";
-
+import { Container, Row, Col } from "react-bootstrap";
+import LoginForm from "../../components/LoginForm/LoginForm";
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <h1>Log In!</h1>
+          <hr />
+          <LoginForm />
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default LoginPage;
