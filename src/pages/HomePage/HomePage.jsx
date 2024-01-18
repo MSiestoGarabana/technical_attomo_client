@@ -38,7 +38,7 @@ const HomePage = () => {
 
       <Modal show={showCreateGameModal} onHide={closeCreateGameModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Nueva montaña rusa</Modal.Title>
+          <Modal.Title>Create a new game</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CreateGameForm

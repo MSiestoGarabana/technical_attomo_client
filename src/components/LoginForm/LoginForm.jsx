@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import authService from "./../../services/auth.services";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth.context";
 
 import "./LoginForm.css";
 
@@ -12,6 +13,8 @@ function LoginForm() {
   });
 
   const navigate = useNavigate();
+
+  const { setUser } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -24,7 +27,10 @@ function LoginForm() {
     authService
       .login(loginData)
       .then(({ data }) => {
-        console.log("RESPUESTA", data);
+        localStorage.setItem("authToken", data.authToken);
+        authService.verify(data.authToken).then(({ data }) => {
+          setUser(data);
+        });
         navigate("/");
       })
       .catch((err) => console.log(err));
