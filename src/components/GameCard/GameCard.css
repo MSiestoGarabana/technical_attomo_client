@@ -1,0 +1,4 @@
+.GameCard img {
+    height: 140px;
+    object-fit: cover;
+}
