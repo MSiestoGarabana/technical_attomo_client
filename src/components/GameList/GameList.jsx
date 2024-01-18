@@ -4,10 +4,10 @@ import GameCard from "../GameCard/GameCard";
 const GamesList = ({ games }) => {
   return (
     <Row>
-      {games.map((coaster) => {
+      {games.map((game) => {
         return (
-          <Col md={3} key={coaster._id}>
-            <GameCard {...coaster} />
+          <Col md={3} key={game._id}>
+            <GameCard {...game} />
           </Col>
         );
       })}
