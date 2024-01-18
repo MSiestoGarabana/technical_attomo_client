@@ -7,7 +7,7 @@ import gamesService from "../../services/games.services";
 import GamesList from "../../components/GameList/GameList";
 
 const HomePage = () => {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState();
 
   useEffect(() => {
     loadGames();
@@ -24,7 +24,7 @@ const HomePage = () => {
     <Container>
       <h1>¡Vote your favorite games!</h1>
       <hr />
-      {games.length ? <GamesList games={games} /> : <Loader />}
+      {!games ? <Loader /> : <GamesList games={games} />}
     </Container>
   );
 };
