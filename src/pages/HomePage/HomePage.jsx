@@ -11,7 +11,7 @@ import CreateGameForm from "../../components/CreateGameForm/CreateGameForm";
 
 const HomePage = () => {
   const [games, setGames] = useState();
-  const [showModal, setShowModal] = useState(false);
+  const [showCreateGameModal, setShowCreateGameModal] = useState(false);
 
   useEffect(() => {
     loadGames();
@@ -24,24 +24,27 @@ const HomePage = () => {
       .catch((err) => console.log(err));
   };
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openCreateGameModal = () => setShowCreateGameModal(true);
+  const closeCreateGameModal = () => setShowCreateGameModal(false);
 
   return (
     <>
       <Container>
         <h1>¡Vote your favorite games!</h1>
-        <span onClick={openModal}>+</span>
+        <span onClick={openCreateGameModal}>+</span>
         <hr />
         {!games ? <Loader /> : <GamesList games={games} />}
       </Container>
 
-      <Modal show={showModal} onHide={closeModal}>
+      <Modal show={showCreateGameModal} onHide={closeCreateGameModal}>
         <Modal.Header closeButton>
           <Modal.Title>Nueva montaña rusa</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateGameForm closeModal={closeModal} refreshGames={loadGames} />
+          <CreateGameForm
+            closeModal={closeCreateGameModal}
+            refreshGames={loadGames}
+          />
         </Modal.Body>
       </Modal>
     </>
