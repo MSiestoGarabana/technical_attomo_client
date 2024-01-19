@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/auth.context";
 const Navigation = () => {
   const { theme } = useContext(ThemeContext);
   const variant = theme === "light" ? "dark" : "light";
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   return (
     <Navbar bg={variant} expand="md" variant={variant} className="mb-5">
       <Container>
@@ -19,12 +19,23 @@ const Navigation = () => {
             <Link to="/">
               <Nav.Link as="span">Home</Nav.Link>
             </Link>
-            <Link to="/login">
-              <Nav.Link as="span">login</Nav.Link>
-            </Link>
-            <Link to="/signUp">
-              <Nav.Link as="span">Sign Up</Nav.Link>
-            </Link>
+
+            {user ? (
+              <>
+                <Nav.Link as="span" onClick={logout}>
+                  Log Out
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Nav.Link as="span">Log In</Nav.Link>
+                </Link>
+                <Link>
+                  <Nav.Link as="span">Sign Up</Nav.Link>
+                </Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
