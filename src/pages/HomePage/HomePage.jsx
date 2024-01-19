@@ -8,12 +8,9 @@ import gamesService from "../../services/games.services";
 import Loader from "../../components/Loader/Loader";
 import GamesList from "../../components/GameList/GameList";
 
-import { AuthContext } from "../../contexts/auth.context";
-
 const HomePage = () => {
   const [games, setGames] = useState();
 
-  const { user } = useContext(AuthContext);
   useEffect(() => {
     loadGames();
   }, []);

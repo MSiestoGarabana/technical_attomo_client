@@ -3,14 +3,18 @@ import { useState, useContext, useEffect } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
 import { AuthContext } from "../../contexts/auth.context";
 import gamesService from "../../services/games.services";
-
-import GamesList from "../../components/GameList/GameList";
+import ManageGamesList from "../../components/ManageGamesList/ManageGamesList";
 import Loader from "../../components/Loader/Loader";
 import CreateGameForm from "../../components/CreateGameForm/CreateGameForm";
+import EditGameForm from "../../components/EditGameForm/EditGameForm";
+import DeleteGameForm from "../../components/DeleteGameForm/DeleteGameForm";
 
 const ManagePage = () => {
   const [games, setGames] = useState();
+  const [selectedGame, setSelectedGame] = useState(undefined);
   const [showCreateGameModal, setShowCreateGameModal] = useState(false);
+  const [showEditGameModal, setShowEditGameModal] = useState(false);
+  const [showDeleteGameModal, setShowDeleteGameModal] = useState(false);
 
   useEffect(() => {
     loadGames();
@@ -25,6 +29,12 @@ const ManagePage = () => {
   const openCreateGameModal = () => setShowCreateGameModal(true);
   const closeCreateGameModal = () => setShowCreateGameModal(false);
 
+  const openEditGameModal = () => setShowEditGameModal(true);
+  const closeEditGameModal = () => setShowEditGameModal(false);
+
+  const openDeleteGameModal = () => setShowDeleteGameModal(true);
+  const closeDeleteGameModal = () => setShowDeleteGameModal(false);
+
   return (
     <>
       <Container>
@@ -33,7 +43,16 @@ const ManagePage = () => {
           Add game to list
         </Button>
         <hr />
-        {!games ? <Loader /> : <GamesList games={games} />}
+        {!games ? (
+          <Loader />
+        ) : (
+          <ManageGamesList
+            games={games}
+            openEditGameModal={openEditGameModal}
+            openDeleteGameModal={openDeleteGameModal}
+            setSelectedGame={setSelectedGame}
+          />
+        )}
       </Container>
 
       <Modal show={showCreateGameModal} onHide={closeCreateGameModal}>
@@ -44,6 +63,30 @@ const ManagePage = () => {
           <CreateGameForm
             closeModal={closeCreateGameModal}
             refreshGames={loadGames}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal show={showEditGameModal} onHide={closeEditGameModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit game</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditGameForm
+            closeModal={closeEditGameModal}
+            refreshGames={loadGames}
+            selectedGame={selectedGame}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal show={showDeleteGameModal} onHide={closeDeleteGameModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <DeleteGameForm
+            closeModal={closeDeleteGameModal}
+            refreshGames={loadGames}
+            selectedGame={selectedGame}
           />
         </Modal.Body>
       </Modal>
