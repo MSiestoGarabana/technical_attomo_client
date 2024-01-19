@@ -8,6 +8,17 @@ import {
 import { useState } from "react";
 import gamesService from "./../../services/games.services";
 
+const categories = [
+  "ACTION",
+  "ACTION-ADVENTURE",
+  "PUZZLE",
+  "ROLE-PLAYING",
+  "SIMULATION",
+  "STRATEGY",
+  "SPORTS",
+  "MMO",
+];
+
 const EditGameForm = ({ closeModal, refreshGames }) => {
   const [gameData, setGameData] = useState({
     title: "",
@@ -55,16 +66,7 @@ const EditGameForm = ({ closeModal, refreshGames }) => {
           title={category || "Select Category"}
           id="segmented-button-dropdown-1"
         >
-          {[
-            "ACTION",
-            "ACTION-ADVENTURE",
-            "PUZZLE",
-            "ROLE-PLAYING",
-            "SIMULATION",
-            "STRATEGY",
-            "SPORTS",
-            "MMO",
-          ].map((cat) => (
+          {categories.map((cat) => (
             <Dropdown.Item key={cat} onClick={() => handleCategorySelect(cat)}>
               {cat}
             </Dropdown.Item>

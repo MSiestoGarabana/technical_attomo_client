@@ -26,6 +26,8 @@ const ManagePage = () => {
       .then(({ data }) => setGames(data))
       .catch((err) => console.log(err));
   };
+
+  //TODO HOOK, COLOCATION DE LAS CARPETAS
   const openCreateGameModal = () => setShowCreateGameModal(true);
   const closeCreateGameModal = () => setShowCreateGameModal(false);
 

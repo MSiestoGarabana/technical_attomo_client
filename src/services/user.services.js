@@ -8,10 +8,10 @@ class UsersService {
   }
 
   addVoteToUser(user_id) {
-    return this.api.get(`/addVoteToUser/${user_id}`);
+    return this.api.put(`/addVoteToUser/${user_id}`);
   }
   substractVoteToUser(user_id) {
-    return this.api.get(`/substractVoteToUser/${user_id}`);
+    return this.api.put(`/substractVoteToUser/${user_id}`);
   }
 }
 
