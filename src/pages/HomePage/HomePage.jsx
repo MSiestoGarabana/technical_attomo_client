@@ -27,7 +27,11 @@ const HomePage = () => {
       <Container>
         <h1>¡Vote your favorite games!</h1>
         <hr />
-        {!games ? <Loader /> : <GamesList games={games} />}
+        {!games ? (
+          <Loader />
+        ) : (
+          <GamesList games={games} refreshGames={loadGames} />
+        )}
       </Container>
     </>
   );

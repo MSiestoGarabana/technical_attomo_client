@@ -1,3 +1,4 @@
+import gamesService from "../services/games.services";
 function isAdmin(userRole) {
   let isAdmin = undefined;
   if (userRole === "ADMIN") {

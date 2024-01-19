@@ -18,6 +18,14 @@ class GamesService {
   deleteGame(game_id) {
     return this.api.delete(`/deleteGame/${game_id}`);
   }
+  addVote(game_id, userData) {
+    const { _id: user_id } = userData;
+    return this.api.put(`/addVote/${game_id}`, { user_id });
+  }
+  deductVote(game_id, userData) {
+    const { _id: user_id } = userData;
+    return this.api.put(`/deductVote/${game_id}`, { user_id });
+  }
 }
 
 const gamesService = new GamesService();
