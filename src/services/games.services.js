@@ -15,6 +15,9 @@ class GamesService {
   createGame(gameData) {
     return this.api.post("/createGame", gameData);
   }
+  editGame(game_id, gameData) {
+    return this.api.put("/editGame", { ...gameData, game_id });
+  }
   deleteGame(game_id) {
     return this.api.delete(`/deleteGame/${game_id}`);
   }

@@ -20,8 +20,8 @@ const Navigation = () => {
         <Navbar.Brand>2023 BEST GAME</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            {user && <p>Hi there! {user.username}</p>}
+          <Nav className="ms-auto d-flex align-items-center">
+            {user && <p className="mb-0">Hi there! {user.username}</p>}
             <Link to="/">
               <Nav.Link as="span">Home</Nav.Link>
             </Link>

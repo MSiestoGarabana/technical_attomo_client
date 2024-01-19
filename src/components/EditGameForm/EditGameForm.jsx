@@ -5,7 +5,7 @@ import {
   SplitButton,
   Dropdown,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gamesService from "./../../services/games.services";
 
 const categories = [
@@ -19,12 +19,24 @@ const categories = [
   "MMO",
 ];
 
-const EditGameForm = ({ closeModal, refreshGames }) => {
+const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
   const [gameData, setGameData] = useState({
     title: "",
     category: "",
     image: undefined,
   });
+  console.log("GAME DATA", gameData);
+
+  useEffect(() => {
+    loadGameInfo();
+  }, []);
+
+  const loadGameInfo = () => {
+    gamesService
+      .getGameById(selectedGame)
+      .then(({ data }) => setGameData(data))
+      .catch((e) => console.log(e));
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -39,7 +51,7 @@ const EditGameForm = ({ closeModal, refreshGames }) => {
     e.preventDefault();
 
     gamesService
-      .createGame(gameData)
+      .editGame(selectedGame, gameData)
       .then(() => {
         closeModal();
         refreshGames();
