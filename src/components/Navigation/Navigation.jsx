@@ -31,7 +31,7 @@ const Navigation = () => {
                 <Link to="/login">
                   <Nav.Link as="span">Log In</Nav.Link>
                 </Link>
-                <Link>
+                <Link to="/signup">
                   <Nav.Link as="span">Sign Up</Nav.Link>
                 </Link>
               </>

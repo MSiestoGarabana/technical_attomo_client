@@ -32,7 +32,7 @@ const HomePage = () => {
     <>
       <Container>
         <h1>¡Vote your favorite games!</h1>
-        {user && (
+        {user?.role === "ADMIN" && (
           <Button
             variant="dark"
             size="lg"
