@@ -9,6 +9,11 @@ const Navigation = () => {
   const { theme } = useContext(ThemeContext);
   const variant = theme === "light" ? "dark" : "light";
   const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <Navbar bg={variant} expand="md" variant={variant} className="mb-5">
       <Container>
@@ -28,8 +33,8 @@ const Navigation = () => {
 
             {user ? (
               <>
-                <Link>
-                  <Nav.Link as="span" onClick={logout}>
+                <Link to="/">
+                  <Nav.Link as="span" onClick={handleLogout}>
                     Log Out
                   </Nav.Link>
                 </Link>
