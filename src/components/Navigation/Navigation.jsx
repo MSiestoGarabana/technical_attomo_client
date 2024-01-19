@@ -3,6 +3,7 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../contexts/theme.context";
 import { AuthContext } from "../../contexts/auth.context";
+import { isAdmin } from "../../utils/user-utils";
 
 const Navigation = () => {
   const { theme } = useContext(ThemeContext);
@@ -19,12 +20,19 @@ const Navigation = () => {
             <Link to="/">
               <Nav.Link as="span">Home</Nav.Link>
             </Link>
+            {isAdmin(user?.role) && (
+              <Link to="/manage">
+                <Nav.Link as="span">Manage Content</Nav.Link>
+              </Link>
+            )}
 
             {user ? (
               <>
-                <Nav.Link as="span" onClick={logout}>
-                  Log Out
-                </Nav.Link>
+                <Link>
+                  <Nav.Link as="span" onClick={logout}>
+                    Log Out
+                  </Nav.Link>
+                </Link>
               </>
             ) : (
               <>
