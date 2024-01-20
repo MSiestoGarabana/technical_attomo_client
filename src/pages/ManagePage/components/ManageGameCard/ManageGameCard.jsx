@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import EditIcon from "../../Icons/EditIcon";
-import DeleteIcon from "../../Icons/DeleteIcon";
+import EditIcon from "../../../../Icons/EditIcon";
+import DeleteIcon from "../../../../Icons/DeleteIcon";
 
 const ManageGameCard = ({
   title,

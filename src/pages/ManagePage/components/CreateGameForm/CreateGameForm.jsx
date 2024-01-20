@@ -5,8 +5,8 @@ import {
   SplitButton,
   Dropdown,
 } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import gamesService from "./../../services/games.services";
+import { useState } from "react";
+import gamesService from "../../../../services/games.services";
 
 const categories = [
   "ACTION",
@@ -19,24 +19,14 @@ const categories = [
   "MMO",
 ];
 
-const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
+const CreateGameForm = ({ closeModal, refreshGames }) => {
   const [gameData, setGameData] = useState({
     title: "",
     category: "",
     image: undefined,
   });
-  console.log("GAME DATA", gameData);
-
-  useEffect(() => {
-    loadGameInfo();
-  }, []);
-
-  const loadGameInfo = () => {
-    gamesService
-      .getGameById(selectedGame)
-      .then(({ data }) => setGameData(data))
-      .catch((e) => console.log(e));
-  };
+  console.log(gameData);
+  const [loadingImage, setLoadingImage] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -46,12 +36,29 @@ const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
   const handleCategorySelect = (selectedCategory) => {
     setGameData({ ...gameData, category: selectedCategory });
   };
+  const handleFileUpload = (e) => {
+    setLoadingImage(true);
+
+    const formData = new FormData();
+    formData.append("gameImage", e.target.files[0]);
+
+    uploadServices
+      .uploadimage(formData)
+      .then(({ data }) => {
+        setGameData({ ...gameData, image: data.cloudinary_url });
+        setLoadingImage(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadingImage(false);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     gamesService
-      .editGame(selectedGame, gameData)
+      .createGame(gameData)
       .then(() => {
         closeModal();
         refreshGames();
@@ -86,23 +93,18 @@ const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
         </SplitButton>
       </InputGroup>
 
-      <Form.Group className="mb-3" controlId="image">
-        <Form.Label>Image (URL)</Form.Label>
-        <Form.Control
-          type="text"
-          value={image}
-          onChange={handleChange}
-          name="image"
-        />
+      <Form.Group className="mb-3 d-flex flex-column" controlId="image">
+        <Form.Label>Upload an image</Form.Label>
+        <Form.Control type="file" onChange={handleFileUpload} />
       </Form.Group>
 
       <div className="d-grid">
-        <Button variant="dark" type="submit">
-          Save changes
+        <Button variant="dark" type="submit" disabled={loadingImage}>
+          {loadingImage ? "Loading Image" : "CreateNewGame"}
         </Button>
       </div>
     </Form>
   );
 };
 
-export default EditGameForm;
+export default CreateGameForm;

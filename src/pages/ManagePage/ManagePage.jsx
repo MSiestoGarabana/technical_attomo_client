@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { Container, Button, Modal } from "react-bootstrap";
-import { AuthContext } from "../../contexts/auth.context";
 import gamesService from "../../services/games.services";
-import ManageGamesList from "../../components/ManageGamesList/ManageGamesList";
-import Loader from "../../components/Loader/Loader";
-import CreateGameForm from "../../components/CreateGameForm/CreateGameForm";
-import EditGameForm from "../../components/EditGameForm/EditGameForm";
-import DeleteGameForm from "../../components/DeleteGameForm/DeleteGameForm";
+import Loader from "../../components/Loader";
+import CreateGameForm from "./components/CreateGameForm";
+import ManageGamesList from "./components/ManageGamesList";
+import EditGameForm from "./components/EditGameForm";
+import DeleteGameForm from "./components/DeleteGameForm";
 
 const ManagePage = () => {
   const [games, setGames] = useState();
@@ -27,7 +26,6 @@ const ManagePage = () => {
       .catch((err) => console.log(err));
   };
 
-  //TODO HOOK, COLOCATION DE LAS CARPETAS
   const openCreateGameModal = () => setShowCreateGameModal(true);
   const closeCreateGameModal = () => setShowCreateGameModal(false);
 

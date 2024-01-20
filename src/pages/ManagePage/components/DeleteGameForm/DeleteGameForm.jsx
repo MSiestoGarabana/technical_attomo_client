@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import gamesService from "../../services/games.services";
+import gamesService from "../../../../services/games.services";
 
 const DeleteGameForm = ({ closeModal, refreshGames, selectedGame }) => {
   const handleClick = () => {

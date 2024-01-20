@@ -1,5 +1,4 @@
 import { Row, Col } from "react-bootstrap";
-import GameCard from "../GameCard/GameCard";
 import ManageGameCard from "../ManageGameCard/ManageGameCard";
 
 const ManageGamesList = ({

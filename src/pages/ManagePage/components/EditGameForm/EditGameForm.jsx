@@ -5,15 +5,38 @@ import {
   SplitButton,
   Dropdown,
 } from "react-bootstrap";
-import { useState } from "react";
-import gamesService from "./../../services/games.services";
+import { useEffect, useState } from "react";
+import gamesService from "../../../../services/games.services";
 
-const CreateGameForm = ({ closeModal, refreshGames }) => {
+const categories = [
+  "ACTION",
+  "ACTION-ADVENTURE",
+  "PUZZLE",
+  "ROLE-PLAYING",
+  "SIMULATION",
+  "STRATEGY",
+  "SPORTS",
+  "MMO",
+];
+
+const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
   const [gameData, setGameData] = useState({
     title: "",
     category: "",
     image: undefined,
   });
+  console.log("GAME DATA", gameData);
+
+  useEffect(() => {
+    loadGameInfo();
+  }, []);
+
+  const loadGameInfo = () => {
+    gamesService
+      .getGameById(selectedGame)
+      .then(({ data }) => setGameData(data))
+      .catch((e) => console.log(e));
+  };
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -28,7 +51,7 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
     e.preventDefault();
 
     gamesService
-      .createGame(gameData)
+      .editGame(selectedGame, gameData)
       .then(() => {
         closeModal();
         refreshGames();
@@ -55,16 +78,7 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
           title={category || "Select Category"}
           id="segmented-button-dropdown-1"
         >
-          {[
-            "ACTION",
-            "ACTION-ADVENTURE",
-            "PUZZLE",
-            "ROLE-PLAYING",
-            "SIMULATION",
-            "STRATEGY",
-            "SPORTS",
-            "MMO",
-          ].map((cat) => (
+          {categories.map((cat) => (
             <Dropdown.Item key={cat} onClick={() => handleCategorySelect(cat)}>
               {cat}
             </Dropdown.Item>
@@ -84,11 +98,11 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
 
       <div className="d-grid">
         <Button variant="dark" type="submit">
-          Create New Game
+          Save changes
         </Button>
       </div>
     </Form>
   );
 };
 
-export default CreateGameForm;
+export default EditGameForm;

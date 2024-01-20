@@ -3,8 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { Container, Dropdown } from "react-bootstrap";
 
 import gamesService from "../../services/games.services";
-import Loader from "../../components/Loader/Loader";
-import GamesList from "../../components/GameList/GameList";
+import Loader from "../../components/Loader";
+import GamesList from "./components/GamesList";
 import { AuthContext } from "../../contexts/auth.context";
 import { Form } from "react-bootstrap";
 
@@ -53,6 +53,7 @@ const HomePage = () => {
   };
 
   const handleSearchTermChange = (event) => {
+    event.preventDefault();
     setSearchTerm(event.target.value); // Manejar el cambio en el término de búsqueda mientras el usuario escribe
   };
 
@@ -86,18 +87,20 @@ const HomePage = () => {
             <h2>You have {availableVotes} votes left</h2>
           )}
         </div>
-        <Dropdown>
-          {renderDropdownButton()}
-          <Dropdown.Menu>{renderDropdownItems()}</Dropdown.Menu>
-        </Dropdown>
-        <Form.Group controlId="searchTerm">
-          <Form.Control
-            type="text"
-            placeholder="Search by title"
-            value={searchTerm}
-            onChange={handleSearchTermChange}
-          />
-        </Form.Group>
+        <div className="d-flex">
+          <Form.Group controlId="searchTerm">
+            <Form.Control
+              type="text"
+              placeholder="Search by title"
+              value={searchTerm}
+              onChange={handleSearchTermChange}
+            />
+          </Form.Group>
+          <Dropdown>
+            {renderDropdownButton()}
+            <Dropdown.Menu>{renderDropdownItems()}</Dropdown.Menu>
+          </Dropdown>
+        </div>
         <hr />
         {!games ? (
           <Loader />

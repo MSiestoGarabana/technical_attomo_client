@@ -2,14 +2,14 @@ import "./GameCard.css";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import gamesService from "../../services/games.services";
-import usersService from "../../services/user.services";
+import gamesService from "../../../../services/games.services";
+import usersService from "../../../../services/user.services";
 
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/auth.context";
+import { AuthContext } from "../../../../contexts/auth.context";
 
-import MinusIcon from "../../Icons/MinusIcon";
-import AddIcon from "../../Icons/AddIcon";
+import MinusIcon from "../../../../Icons/MinusIcon";
+import AddIcon from "../../../../Icons/AddIcon";
 
 const GameCard = ({
   title,
