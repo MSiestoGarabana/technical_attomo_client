@@ -12,12 +12,11 @@ const HomePage = () => {
   const [games, setGames] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState(null);
-
-  console.log(searchTerm);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     loadGames();
-  }, [sortOrder, searchTerm]);
+  }, [sortOrder, searchTerm, selectedCategory]);
 
   const loadGames = () => {
     gamesService
@@ -32,6 +31,12 @@ const HomePage = () => {
           );
         }
 
+        if (selectedCategory) {
+          filteredGames = filteredGames.filter(
+            (game) => game.category === selectedCategory
+          );
+        }
+
         const sortedGames = filteredGames.slice();
 
         if (sortOrder === "asc") {
@@ -39,7 +44,6 @@ const HomePage = () => {
         } else if (sortOrder === "desc") {
           sortedGames.sort((a, b) => b.votesReceived - a.votesReceived);
         }
-
         setGames(sortedGames);
       })
       .catch((err) => console.log(err));
@@ -54,7 +58,21 @@ const HomePage = () => {
 
   const handleSearchTermChange = (event) => {
     event.preventDefault();
-    setSearchTerm(event.target.value); // Manejar el cambio en el término de búsqueda mientras el usuario escribe
+    setSearchTerm(event.target.value);
+  };
+
+  const categories = [
+    "ACTION",
+    "ACTION-ADVENTURE",
+    "PUZZLE",
+    "ROLE-PLAYING",
+    "SIMULATION",
+    "STRATEGY",
+    "SPORTS",
+    "MMO",
+  ];
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
   };
 
   const renderDropdownButton = () => (
@@ -100,6 +118,20 @@ const HomePage = () => {
             {renderDropdownButton()}
             <Dropdown.Menu>{renderDropdownItems()}</Dropdown.Menu>
           </Dropdown>
+          <Form.Group controlId="categoryFilter">
+            <Form.Control
+              as="select"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value={""}>Filter by category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
         </div>
         <hr />
         {!games ? (

@@ -13,6 +13,7 @@ import AddIcon from "../../../../Icons/AddIcon";
 
 const GameCard = ({
   title,
+  category,
   image,
   _id,
   votesReceived,
@@ -61,7 +62,10 @@ const GameCard = ({
       <Link to={`/details/${_id}`}>
         <Card.Img variant="top" src={image} />
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <div className="d-flex flex-row justify-content-between p-2">
+            <Card.Title>{title}</Card.Title>
+            <Card.Title>{category}</Card.Title>
+          </div>
           <hr />
         </Card.Body>
       </Link>
