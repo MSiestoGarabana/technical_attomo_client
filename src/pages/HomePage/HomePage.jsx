@@ -1,12 +1,14 @@
 import "./HomePage.css";
 import { useState, useEffect, useContext } from "react";
-import { Container, Dropdown } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import gamesService from "../../services/games.services";
 import Loader from "../../components/Loader";
 import GamesList from "./components/GamesList";
 import { AuthContext } from "../../contexts/auth.context";
-import { Form } from "react-bootstrap";
+import TitleFilter from "./components/FilterInputs/TitleFilter";
+import CategoryFilter from "./components/FilterInputs/CategoryFilter";
+import VotesFilter from "./components/FilterInputs/VotesFilter";
 
 const HomePage = () => {
   const [games, setGames] = useState();
@@ -61,36 +63,9 @@ const HomePage = () => {
     setSearchTerm(event.target.value);
   };
 
-  const categories = [
-    "ACTION",
-    "ACTION-ADVENTURE",
-    "PUZZLE",
-    "ROLE-PLAYING",
-    "SIMULATION",
-    "STRATEGY",
-    "SPORTS",
-    "MMO",
-  ];
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
-
-  const renderDropdownButton = () => (
-    <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-      Sort by Votes Received
-    </Dropdown.Toggle>
-  );
-
-  const renderDropdownItems = () => (
-    <>
-      <Dropdown.Item onClick={() => handleSortOrder("asc")}>
-        Less votes received first
-      </Dropdown.Item>
-      <Dropdown.Item onClick={() => handleSortOrder("desc")}>
-        More votes received first
-      </Dropdown.Item>
-    </>
-  );
 
   return (
     <>
@@ -106,32 +81,15 @@ const HomePage = () => {
           )}
         </div>
         <div className="d-flex">
-          <Form.Group controlId="searchTerm">
-            <Form.Control
-              type="text"
-              placeholder="Search by title"
-              value={searchTerm}
-              onChange={handleSearchTermChange}
-            />
-          </Form.Group>
-          <Dropdown>
-            {renderDropdownButton()}
-            <Dropdown.Menu>{renderDropdownItems()}</Dropdown.Menu>
-          </Dropdown>
-          <Form.Group controlId="categoryFilter">
-            <Form.Control
-              as="select"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value={""}>Filter by category</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
+          <TitleFilter
+            searchTerm={searchTerm}
+            handleSearchTermChange={handleSearchTermChange}
+          />
+          <VotesFilter handleSortOrder={handleSortOrder} />
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </div>
         <hr />
         {!games ? (
