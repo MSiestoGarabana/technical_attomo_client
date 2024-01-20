@@ -3,7 +3,7 @@ import { Dropdown } from "react-bootstrap";
 
 const VotesFilter = ({ handleSortOrder }) => {
   return (
-    <Dropdown>
+    <Dropdown className={"m-4"}>
       <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
         Sort by Votes Received
       </Dropdown.Toggle>

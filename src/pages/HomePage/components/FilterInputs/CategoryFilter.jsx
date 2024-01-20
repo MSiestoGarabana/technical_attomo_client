@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 
 const categories = [
   "ACTION",
@@ -14,20 +14,25 @@ const categories = [
 
 const CategoryFilter = ({ selectedCategory, setSelectedCategory }) => {
   return (
-    <Form.Group controlId="categoryFilter">
-      <Form.Control
-        as="select"
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
-        <option value={""}>Filter by category</option>
+    <Dropdown className={"m-4"}>
+      <Dropdown.Toggle variant="outline-secondary" id="categoryDropdown">
+        {selectedCategory ? selectedCategory : "Filter by category"}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item key="" onClick={() => setSelectedCategory("")}>
+          Clear filter
+        </Dropdown.Item>
         {categories.map((category) => (
-          <option key={category} value={category}>
+          <Dropdown.Item
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+          >
             {category}
-          </option>
+          </Dropdown.Item>
         ))}
-      </Form.Control>
-    </Form.Group>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

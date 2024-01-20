@@ -70,7 +70,7 @@ const HomePage = () => {
   return (
     <>
       <Container>
-        <div className="d-flex justify-content-around align-items-center">
+        <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center">
           <h1>¡Vote your favorite games!</h1>
           {!userData ? (
             <h2>Log in to start voting</h2>
@@ -80,7 +80,7 @@ const HomePage = () => {
             <h2>You have {availableVotes} votes left</h2>
           )}
         </div>
-        <div className="d-flex">
+        <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center align-items-sm-start">
           <TitleFilter
             searchTerm={searchTerm}
             handleSearchTermChange={handleSearchTermChange}
