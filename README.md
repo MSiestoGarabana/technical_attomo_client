@@ -4,7 +4,9 @@ Frontend connect to REST API:
 
 - https://github.com/MSiestoGarabana/technical_attomo_server
 
-#### Local testing recommended. Uploading images into Cloudinary isn´t still working properly in the deployed version. :expressionless:
+Local testing recommended. Uploading images into Cloudinary isn´t still working properly in the deployed version. :expressionless:
+
+However , you can check the live version here: https://technical-attomo-client.vercel.app/
 
 ## Init proyect
 
@@ -19,3 +21,5 @@ npm install
 ```
 npm run dev
 ```
+
+## Live Demo
