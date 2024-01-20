@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import gamesService from "../../../../services/games.services";
+import uploadServices from "../../../../services/upload.services";
 
 const categories = [
   "ACTION",
@@ -45,6 +46,7 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
     uploadServices
       .uploadimage(formData)
       .then(({ data }) => {
+        console.log("Data from crateGameForm", data);
         setGameData({ ...gameData, image: data.cloudinary_url });
         setLoadingImage(false);
       })
