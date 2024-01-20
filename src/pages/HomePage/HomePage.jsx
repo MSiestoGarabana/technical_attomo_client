@@ -48,7 +48,10 @@ const HomePage = () => {
         }
         setGames(sortedGames);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   const { user: userData } = useContext(AuthContext);

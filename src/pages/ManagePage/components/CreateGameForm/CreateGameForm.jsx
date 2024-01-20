@@ -26,7 +26,6 @@ const CreateGameForm = ({ closeModal, refreshGames }) => {
     category: "",
     image: undefined,
   });
-  console.log(gameData);
   const [loadingImage, setLoadingImage] = useState(false);
 
   const handleChange = (e) => {

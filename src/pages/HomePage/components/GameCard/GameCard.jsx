@@ -36,6 +36,7 @@ const GameCard = ({
       updateVotes(data.availableVotes);
     } catch (e) {
       console.log(e);
+      alert(e);
     }
 
     refreshGames();
@@ -49,6 +50,7 @@ const GameCard = ({
       updateVotes(data.availableVotes);
     } catch (e) {
       console.log(e);
+      alert(e);
     }
 
     refreshGames();

@@ -23,7 +23,10 @@ const ManagePage = () => {
     gamesService
       .getAllGames()
       .then(({ data }) => setGames(data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   const openCreateGameModal = () => setShowCreateGameModal(true);

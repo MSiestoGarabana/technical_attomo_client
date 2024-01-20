@@ -14,13 +14,20 @@ function AuthProviderWrapper(props) {
     setUser({ ...user, availableVotes });
   };
 
-  const authenticateUser = () => {
+  const authenticateUser = async () => {
     const token = localStorage.getItem("authToken");
 
-    authService
+    if (!token) {
+      return;
+    }
+
+    await authService
       .verify(token)
       .then(({ data }) => setUser(data))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   const logout = () => {

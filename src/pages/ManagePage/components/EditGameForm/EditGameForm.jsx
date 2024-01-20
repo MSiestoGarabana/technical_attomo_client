@@ -25,7 +25,6 @@ const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
     category: "",
     image: undefined,
   });
-  console.log("GAME DATA", gameData);
 
   useEffect(() => {
     loadGameInfo();
@@ -35,7 +34,10 @@ const EditGameForm = ({ closeModal, refreshGames, selectedGame }) => {
     gamesService
       .getGameById(selectedGame)
       .then(({ data }) => setGameData(data))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        alert(e);
+      });
   };
 
   const handleChange = (e) => {

@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, Button, FormGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../../contexts/auth.context";
 import authService from "../../../../services/auth.services";
 
 const SignUpForm = () => {
+  const { authenticateUser, storeToken } = useContext(AuthContext);
+
   const [signupData, setSignupData] = useState({
     username: "",
     password: "",
     role: undefined,
   });
-  console.log(signupData);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -17,13 +19,24 @@ const SignUpForm = () => {
     setSignupData({ ...signupData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await authService.signup(signupData);
 
-    authService
-      .signup(signupData)
-      .then(({ data }) => navigate("/"))
-      .catch((err) => console.log(err));
+      const { data } = await authService.login({
+        username: signupData.username,
+        password: signupData.password,
+      });
+      console.log(data);
+      storeToken(data.authToken);
+      await authenticateUser();
+
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+      alert(e);
+    }
   };
 
   return (

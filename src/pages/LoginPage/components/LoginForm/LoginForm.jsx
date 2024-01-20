@@ -26,12 +26,16 @@ function LoginForm() {
 
     authService
       .login(loginData)
-      .then(({ data }) => {
+      .then(async ({ data }) => {
+        console.log(data);
         storeToken(data.authToken);
-        authenticateUser();
+        await authenticateUser();
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   const { password, username } = loginData;
